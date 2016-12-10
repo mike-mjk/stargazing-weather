@@ -1,4 +1,4 @@
-var url = 'http://api.wunderground.com/api/621abd6600ba2b68/features/hourly10day/geolookup/forecast10day/astronomy/q/';
+var url = 'https://api.wunderground.com/api/621abd6600ba2b68/features/hourly10day/geolookup/forecast10day/astronomy/q/';
 
 
 var populateTemplate = function(array) {
@@ -96,7 +96,6 @@ function getData(zip) {
 				var militaryTime = hours + ':' + minutes.substr(-2);
 
 				var percentIllum = value.moon.phase.illum;
-				// console.log("percent" + percentIllum);
 
 				for (var i = 0; i < 11; i++) {					
 					var dateText = $('.tStyle .date').eq(i).text();
@@ -108,8 +107,6 @@ function getData(zip) {
 						//console.log(dateNumber);
 						$('.tStyle .date').eq(i).siblings('.sunset').text("Sunset: " + militaryTime);
 						$('.tStyle .date').eq(i).siblings('.moon').text("Moon Percent Illuminated: " + percentIllum);
-						console.log("this" + $('.tStyle .date').eq(i).siblings('.moon').text());
-
 					};
 				}
 				//console.log($('.tStyle').find('.date')[0].innerText);
