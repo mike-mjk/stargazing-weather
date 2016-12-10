@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stargazing Weather</title>
+	<link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
+	<link rel="stylesheet" href="main.css" />
+	<link rel="stylesheet" href="float-grid.css" />
+</head>
+<body>
+	<div class="wrapper">
+
+		<div class="container">
+			<h1>Enter your zip code for a quick look at which days in the near future will be best for stargazing</h1>
+			<form action="#" class="js-search-form">
+				<input type="text" class="js-query">
+				<input type="submit" class="js-button" value="Submit" />
+			</form>
+
+			<h2 class="forecast hidden">Stargazing forecast for San Diego California</h2>
+
+			<div id="result"></div>
+		</div>
+		
+		
+		<div class="template col-3 hidden">
+			<div class="card">
+				<div class="tStyle">
+
+
+					<div class="date">Wednesday Nov. 29</div>
+
+					<div class="top-bar"> <p class="evaluation">Great Night for Stargazing</p> </div>
+
+
+
+
+					<div class="temperature">Night Time low: 65&deg;F</div>
+
+					<div class="clouds">Cloud cover: Clear</div>
+
+					<div class="sunset">Sunset: 5:50 pm</div>
+
+					<div class="moon">Moon Percent Illuminated:</div>
+
+				</div>
+			</div>
+		</div>
+		
+		<div class="results">
+		</div>
+		
+		<div class="widget-container">
+			
+			<h2 class="iss-header hidden">Use the International Space Station widget to find out when the space station will be visible!</h2>
+			<div class="iss-widget hidden"> <iframe src='https://spotthestation.nasa.gov/widget/widget.cfm?country=United_States&region=California&city=San_Diego&theme=2' width='310' height='450' frameborder='0' ></iframe></div>
+
+		</div>
+
+		<div class="map-header hidden">
+			<h2>Search the light pollution map below for darker skies near you!</h2>
+			<iframe src='https://www.lightpollutionmap.info/' width='80%' height='1000'></iframe>
+		</div>
+	</div>
+
+	
+	<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+	<script src="app.js"></script>
+
+</body>
+</html>
