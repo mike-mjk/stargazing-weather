@@ -1,5 +1,6 @@
 var url = 'https://api.wunderground.com/api/621abd6600ba2b68/features/hourly10day/geolookup/forecast10day/astronomy/q/';
 
+moment.tz.load(tzAlls);
 
 var populateTemplate = function(array) {
 	
@@ -22,7 +23,7 @@ var populateTemplate = function(array) {
 
 	}
 	else if (array.conditions == "Partly Cloudy") {
-		evaluation.text("There will be some clouds tonight");
+		evaluation.text("There Will Be Some Clouds Tonight");
 		results.find('.top-bar').css("background-color", "#f49e13");
 	}
 	else {
@@ -86,10 +87,13 @@ function getData(zip) {
 		$.getJSON(aeris, function(item) {
 			$.each(item.response, function(index, value) {
 				timestamp = value.sun.setISO;
-				console.log(timestamp);
+				// console.log(timestamp);
+				var time = moment(timestamp);
+				var timezone = value.profile.tz;
+				var time = time.tz(timezone).format('h:mm a z');
 				var date = new Date(timestamp);
-				var hours = date.getUTCHours();
-				console.log(hours);
+				var hours = date.getHours();
+				// console.log(hours);
 				var minutes = "0" + date.getMinutes();
 				var dateNumber = date.getDate();
 				dateNumber = ' ' + dateNumber;
@@ -105,8 +109,8 @@ function getData(zip) {
 					if (dateText.indexOf(dateNumber) >= 0) {
 						//console.log(dateText);
 						//console.log(dateNumber);
-						$('.tStyle .date').eq(i).siblings('.sunset').text("Sunset: " + militaryTime);
-						$('.tStyle .date').eq(i).siblings('.moon').text("Moon Percent Illuminated: " + percentIllum);
+						$('.tStyle .date').eq(i).siblings('.sunset').text("Sunset: " + time);
+						$('.tStyle .date').eq(i).siblings('.moon').text("Moon Illumination: " + percentIllum + " Percent");
 					};
 				}
 				//console.log($('.tStyle').find('.date')[0].innerText);
@@ -134,11 +138,12 @@ function getData(zip) {
      	state = abbrState(state, 'name');
      	city = city.replace(' ', '_');
 
-     	console.log(state);
-     	console.log(city);
+     	// console.log(state);
+     	// console.log(city);
 
      	stationLocation(state, city);
      	city = city.replace('_', ' ');
+     	state = state.replace('_', ' ');
      	forecastFill(state, city);
 	});
 	$('.map-header').removeClass('hidden');
@@ -232,7 +237,7 @@ $( document ).ready(function() {
 	$('.js-button').on("click", function(e) {
 		e.preventDefault();
 		var zip = ($('.js-query').val());
-		console.log("this is " + zip);
+		// console.log("this is " + zip);
 		if (zip.trim().length > 0)
 			getData(zip);
 		else
