@@ -16,6 +16,6 @@ Stargazing Weather can be accessed at https://mike-mjk.github.io/stargazing-weat
 
 ## Screenshots
 
-![screenshot](images/Initial.png)
-![screenshot](images/forecast.png)
-![screenshot](images/iss-widget.png)
+![screenshot](https://github.com/mike-mjk/stargazing-weather/blob/master/Images/Initial.png)
+![screenshot](https://github.com/mike-mjk/stargazing-weather/blob/master/Images/forecast.png)
+![screenshot](https://github.com/mike-mjk/stargazing-weather/blob/master/Images/iss-widget.png)
