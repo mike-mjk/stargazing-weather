@@ -1,5 +1,3 @@
-var url = 'https://api.wunderground.com/api/621abd6600ba2b68/features/hourly10day/geolookup/forecast10day/astronomy/q/';
-
 moment.tz.load(tzAlls);
 
 var populateTemplate = function(array) {
@@ -34,8 +32,6 @@ var populateTemplate = function(array) {
 		});		
 	}
 
-	//console.log(results);
-	
 	return results;
 }
 
@@ -48,35 +44,13 @@ function stationLocation(state, city) {
 	$('.iss-widget').find("iframe").attr("src", src="https://spotthestation.nasa.gov/widget/widget.cfm?country=United_States&region=" + state + "&city=" + city + "&theme=2");
 	$('.iss-widget, h2').removeClass('hidden');
 }
-//formats latitude and longitude into format needed for lightpollutionmap.info
 
-function formatLatLon(latLon) {
-			if (latLon >=100) {
-			latLon = latLon.toString();
-			latLon = latLon.replace(/\./g,'');
-			latLon = latLon.slice(0,8);
-		}
-		else if (latLon >= 0) {
-			latLon = latLon.toString();
-			latLon = latLon.replace(/\./g,'');
-			latLon = latLon.slice(0,7);
-		}
-		else if (latLon < -100) {
-			latLon = latLon.toString();
-			latLon = latLon.replace(/\./g,'');
-			latLon = latLon.slice(0,9);
-		}
-		else {
-			latLon = latLon.toString();
-			latLon = latLon.replace(/\./g,'');
-			latLon = latLon.slice(0,8);
-		}
-		return latLon;
-}
 function getData(zip) {
 	$(".results").html("");
-	$.getJSON(url + zip + ".json", function(response) {
-		
+
+	var url = 'https://api.wunderground.com/api/621abd6600ba2b68/features/hourly10day/geolookup/forecast10day/astronomy/q/';
+	// Gets weather data from wunderground API
+	$.getJSON(url + zip + ".json", function(response) {	
 		var simpleDay = response.forecast.simpleforecast.forecastday
 		$.each(simpleDay, function(index, value) {
 			var day = populateTemplate(value);
@@ -84,53 +58,29 @@ function getData(zip) {
 		});
 
 		var aeris = "https://api.aerisapi.com/sunmoon/" + zip + "?client_id=apw9Hpj2miQJSaaY3GFi4&client_secret=hNzOez3RbdF3DWZgkM0vRzA8F4FKw35ge8naGaZX&from=now&to=+10days&limit=10";
+		//Gets sunset and moon data and applies them to corresponding date in the html
 		$.getJSON(aeris, function(item) {
 			$.each(item.response, function(index, value) {
 				timestamp = value.sun.setISO;
-				// console.log(timestamp);
 				var time = moment(timestamp);
 				var timezone = value.profile.tz;
 				var time = time.tz(timezone).format('h:mm a z');
 				var date = new Date(timestamp);
-				var hours = date.getHours();
-				// console.log(hours);
-				var minutes = "0" + date.getMinutes();
 				var dateNumber = date.getDate();
 				dateNumber = ' ' + dateNumber;
-				var militaryTime = hours + ':' + minutes.substr(-2);
 
 				var percentIllum = value.moon.phase.illum;
 
 				for (var i = 0; i < 11; i++) {					
-					var dateText = $('.tStyle .date').eq(i).text();
-					// console.log(dateNumber);
-					// console.log(dateText);
-					// console.log(dateText.indexOf(dateNumber));
+					var dateText = $('.t-style .date').eq(i).text();
 					if (dateText.indexOf(dateNumber) >= 0) {
-						//console.log(dateText);
-						//console.log(dateNumber);
-						$('.tStyle .date').eq(i).siblings('.sunset').text("Sunset: " + time);
-						$('.tStyle .date').eq(i).siblings('.moon').text("Moon Illumination: " + percentIllum + " Percent");
+						$('.t-style .date').eq(i).siblings('.sunset').text("Sunset: " + time);
+						$('.t-style .date').eq(i).siblings('.moon').text("Moon Illumination: " + percentIllum + " Percent");
 					};
 				}
-				//console.log($('.tStyle').find('.date')[0].innerText);
-				//console.log(dateText);
 
 			});
-			//console.log(item.response[0]);
 		});
-
-
-		// var lat = response.location.lat;
-		// var lon = response.location.lon;
-		// lon = lon * 1.1109
-		// lat = lat * 1.182
-		// lat = formatLatLon(lat);
-		// lon = formatLatLon(lon);
-		// var mapUrl = "https://www.lightpollutionmap.info/#zoom=10&lat=" + lat +"&lon=" + lon + "&layers=B0TFFFFF";
-		// $('.map').append("<a href ='" + mapUrl +"'>Light Map</a>");
-		// console.log(mapUrl);
-
 
      	state = response.location.state;
      	city = response.location.city;
@@ -138,14 +88,12 @@ function getData(zip) {
      	state = abbrState(state, 'name');
      	city = city.replace(' ', '_');
 
-     	// console.log(state);
-     	// console.log(city);
-
      	stationLocation(state, city);
      	city = city.replace('_', ' ');
      	state = state.replace('_', ' ');
      	forecastFill(state, city);
 	});
+
 	$('.map-header').removeClass('hidden');
 
 
@@ -231,40 +179,14 @@ function abbrState(input, to){
     }
 }
 
-
-// $( document ).ready( getZip );
 $( document ).ready(function() { 
 	$('.js-button').on("click", function(e) {
 		e.preventDefault();
 		var zip = ($('.js-query').val());
-		// console.log("this is " + zip);
-		if (zip.trim().length > 0)
+		if (zip.trim().length == 5)
 			getData(zip);
 		else
-			alert("Enter a zip");
+			alert("Enter a valid zipcode");
 
 	});
 });
-
-
-// The following is going to be based off of the thinkful OMDB api code
-
-// function getDataFromApi(location, callback) {
-// 	$.getJSON(url, location, callback);
-// }
-
-// function displayData(data) {
-// 	// this will need to be fleshed out but as a placeholder:
-// 	console.log(data);
-// }
-
-// function watchSubmit() {
-// 	$('.js-search-form').submit(function(e) {
-// 		e.preventDefault();
-// 		var location = $(this).find('.js-query').val();
-// 		location = location + ".json"
-// 		getDataFromApi(location, displayData);
-// 	});
-// }
-
-// $(function(){watchSubmit();});
