@@ -4,7 +4,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Stargazing Weather</title>
-	<link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300|Montserrat" rel="stylesheet">
 	<link rel="stylesheet" href="main.css">
 	<link rel="stylesheet" href="float-grid.css">
 </head>
@@ -12,13 +12,14 @@
 <body>
 	<div class="wrapper">
 
-		<div class="container">
+		<div class="container main">
 			
 			<h1>Enter your zip code for a quick look at which days in the near future will be best for stargazing</h1>
 			
 			<form action="#" class="js-search-form">
-				<input type="text" class="js-query">
-				<input type="submit" class="js-button" value="Submit" />
+				<input type="text" class="js-query search">
+				<!-- <input type="submit" class="js-button btn blue" value="Submit" /> -->
+				<a class="js-button btn blue">Submit</a>
 			</form>
 
 			<h2 class="forecast hidden">Stargazing forecast for San Diego California</h2>

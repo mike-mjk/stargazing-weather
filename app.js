@@ -182,6 +182,8 @@ function abbrState(input, to){
 $( document ).ready(function() { 
 	$('.js-button').on("click", function(e) {
 		e.preventDefault();
+        $("body").css("background", "url('https://www.toptal.com/designers/subtlepatterns/patterns/cork-wallet.png')");
+        $("h1, h2").css("color", "#111")
 		var zip = ($('.js-query').val());
 		if (zip.trim().length == 5)
 			getData(zip);
