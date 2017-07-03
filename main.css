@@ -19,7 +19,7 @@ body, html {
 }
 
 body {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(Images/background/7.jpg);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(Images/background/7a.jpg);
 	background-size: cover;
 	height: 100%;
 	background-repeat: no-repeat;
