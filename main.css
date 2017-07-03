@@ -9,7 +9,7 @@ h1 {
 	font-weight: 300;
 	font-size: 300%;
 	letter-spacing: 1px;
-	padding-top: 25px;
+	padding: 25px 10px 0px 10px;
 }
 h1, h2 {
 	color: white;
