@@ -1,6 +1,6 @@
 ## Stargazing Weather
 
-This app allows a user to enter a location and receive a weather forecast tailored to stargazing. It connects to the wunderground API for weather data. It also provides the user with information about International Space Station sightings that will be possible from the user's location. The user is also provided with convenient access to a light pollution map that will allow the user to scout for locations nearby that are less light-polluted and better for stargazing.
+This app allows a user to enter a location and receive a weather forecast tailored to stargazing. It connects to the wunderground API for weather data. It also provides the user with information about International Space Station sightings that will be possible from the user's location.
 
 ## Use-case
 
